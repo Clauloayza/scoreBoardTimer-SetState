@@ -77,14 +77,51 @@ const Header = ({model}) => {
             </tr>
         </table>
         <div className="scoreTitle">SCOREBOARD</div>
-        <div className="stopwatch">
-            <h2>STOPWATCH</h2>
-            <h1 className="stopwatch-time">0</h1>
-            <button>start</button>
-            <button>reset</button>
-        </div>
+        <Timer />
       </header>
   );
+}
+
+class Timer extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      cont: 0,
+      button: 'start'
+    }
+  }
+  startTimer(){
+    this.timer = setInterval(() =>{
+      this.setState({
+        cont: this.state.cont + 1
+      });
+    },1000);
+    this.setState({
+      button: 'stop'
+    })
+  }
+ stopTimer(){
+  clearInterval(this.timer);
+  this.setState({
+    button:'start'
+  })
+}
+resetTimer(){
+  clearInterval(this.timer);
+  this.setState({
+    cont:0
+  })
+}
+render() {
+  return(
+    <div className='stopwatch'>
+    <h2>STOPWATCH</h2>
+    <div className='stopwatch-time'>{this.state.cont}</div>
+    <button onClick={this.state.button==='start'?()=>this.startTimer():()=>this.stopTimer()}>{this.state.button}</button>
+    <button onClick={()=>this.resetTimer()}>reset</button>
+  </div>
+  );
+  }
 }
 
 const PlayerList = ({model}) => {
