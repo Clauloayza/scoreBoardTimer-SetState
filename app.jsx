@@ -67,6 +67,7 @@ const Header = ({model}) => {
   return(
       <header className="header">
         <table className="stats">
+          <tbody>
             <tr>
               <td>PLAYERS:</td>
               <td>{model.getPlayer()}</td>
@@ -75,6 +76,7 @@ const Header = ({model}) => {
               <td>TOTAL POINTS:</td>
               <td>{model.getAllPoints()}</td>
             </tr>
+          </tbody>
         </table>
         <div className="scoreTitle">SCOREBOARD</div>
         <Timer />
